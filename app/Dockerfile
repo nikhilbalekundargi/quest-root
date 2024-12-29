@@ -17,7 +17,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install the dependencies
-RUN npm ci --only=production
+RUN npm install --only=production
 
 # Copy the rest of the application code to the working directory
 COPY . .
@@ -38,7 +38,7 @@ COPY --from=build /usr/src/app .
 USER node
 
 # Expose the port that the application listens on.
-EXPOSE 8080
+EXPOSE 3000
 
 # Define the command to run the application
 CMD ["npm", "start"]
