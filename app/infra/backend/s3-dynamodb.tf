@@ -56,9 +56,14 @@ resource "aws_s3_bucket_policy" "terraform_state_policy" {
         Principal = "*",
         Action = [
           "s3:GetObject",
-          "s3:PutObject"
+          "s3:PutObject",
+          "s3:DeleteObject",
+          "s3:ListBucket"
         ],
-        Resource = "${aws_s3_bucket.terraform_state.arn}/*",
+        Resource = [
+          "${aws_s3_bucket.terraform_state.arn}",
+          "${aws_s3_bucket.terraform_state.arn}/*"
+        ],
         Condition = {
           StringEquals = {
             "aws:PrincipalAccount" = var.account_id
