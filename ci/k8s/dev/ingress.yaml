@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: quest-app-ingress
+  namespace: quest-app
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - af565c8da89824c369d9a3b7ae0dc1fc-1048673516.ap-south-1.elb.amazonaws.com
+      secretName: quest-app-tls
+  rules:
+    - host: af565c8da89824c369d9a3b7ae0dc1fc-1048673516.ap-south-1.elb.amazonaws.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: quest-app-service
+                port:
+                  number: 80
