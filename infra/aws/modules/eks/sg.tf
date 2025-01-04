@@ -1,3 +1,14 @@
+locals {
+  sg_name_prefix = "${local.name_prefix}-sg"
+  
+  sg_tags = merge(
+    var.common_tags,
+    {
+      "kubernetes.io/cluster/${local.name_prefix}-cluster" = "owned"
+    }
+  )
+}
+
 # ALB Security Group
 resource "aws_security_group" "alb" {
   name        = "${local.sg_name_prefix}-alb-${var.region}"
