@@ -53,8 +53,8 @@ module "eks" {
   common_tags        = local.common_tags
 
   kubernetes_version = "1.28"
-  instance_type     = "t3.medium"
-  desired_nodes     = 2
-  min_nodes         = 1
-  max_nodes         = 2
+  instance_type      = "t3.medium"
+  desired_nodes      = 2
+  min_nodes          = 1
+  max_nodes          = 2
 }
