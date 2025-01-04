@@ -52,15 +52,15 @@ spec:
         env:
         - name: NODE_ENV
           value: "production"
-        # - name: SECRET_WORD
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: quest-secrets
-        #       key: secret-word
-        #       optional: false
-      #   volumeMounts:
-      #   - name: tmp
-      #     mountPath: /tmp
-      # volumes:
-      # - name: tmp
-      #   emptyDir: {}
+        - name: SECRET_WORD
+          valueFrom:
+            secretKeyRef:
+              name: quest-secrets
+              key: secret-word
+              optional: false
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+      volumes:
+      - name: tmp
+        emptyDir: {}
