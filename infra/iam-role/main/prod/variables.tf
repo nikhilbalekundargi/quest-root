@@ -24,3 +24,13 @@ variable "trust_policy_document" {
   type        = string
   default     = null
 }
+
+variable "account_id" {
+  description = "AWS Account ID"
+  type        = string
+}
+
+variable "user_name" {
+  description = "IAM user name"
+  type        = string
+}

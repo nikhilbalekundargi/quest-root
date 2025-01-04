@@ -1,3 +1,5 @@
 region                = "ap-south-1"
 role_name             = "TerraformRoleDev"
 policy_name           = "TerraformPolicyDev"
+account_id = "904233133644"
+user_name  = "tf-user-dev"

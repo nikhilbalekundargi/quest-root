@@ -13,8 +13,11 @@ provider "aws" {
 }
 
 locals {
-  policy_document       = file("tf-policy.json")
-  trust_policy_document = file("trust-policy.json")
+  policy_document       = file("${path.module}/../../policies/tf-policy.json")
+  trust_policy_document = templatefile("${path.module}/../../policies/trust-policy.json.tftpl", {
+    account_id = var.account_id
+    user_name  = var.user_name
+  })
 }
 
 module "iam_role_dev" {
