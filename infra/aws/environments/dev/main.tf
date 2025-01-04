@@ -42,3 +42,18 @@ module "vpc" {
   private_subnet_cidrs = var.private_subnet_cidrs
   common_tags          = local.common_tags
 }
+
+module "eks" {
+  source = "../../modules/eks"
+
+  project           = var.project
+  region            = var.region
+  private_subnet_ids = module.vpc.private_subnet_ids
+  common_tags       = local.common_tags
+
+  kubernetes_version = "1.28"
+  instance_type     = "t3.medium"
+  desired_nodes     = 2
+  min_nodes         = 1
+  max_nodes         = 2
+}
