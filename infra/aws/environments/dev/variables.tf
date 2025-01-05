@@ -42,3 +42,16 @@ variable "terraform_role_arn" {
   description = "ARN of the IAM role to assume"
   type        = string
 }
+
+
+variable "alb_controller_config" {
+  type = object({
+    namespace      = string
+    chart_version  = string
+    replicas       = number
+    log_level      = string
+    shield_enable  = bool
+    wafv2_enable   = bool
+  })
+  description = "ALB Controller configuration"
+}

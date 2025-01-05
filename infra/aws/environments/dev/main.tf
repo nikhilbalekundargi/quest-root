@@ -2,6 +2,10 @@ terraform {
   required_version = ">= 1.0"
 
   required_providers {
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 2.0"
+    }
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.0"
@@ -57,4 +61,19 @@ module "eks" {
   desired_nodes      = 2
   min_nodes          = 1
   max_nodes          = 2
+}
+
+#ALB
+module "helm_resources" {
+  source = "../../modules/alb"
+
+  project                = var.project
+  region                = var.region
+  cluster_name          = module.eks.cluster_name
+  cluster_endpoint      = module.eks.cluster_endpoint
+  cluster_ca_certificate= module.eks.cluster_certificate_authority_data
+  oidc_provider_arn     = module.eks.oidc_provider_arn
+  oidc_provider         = module.eks.oidc_provider
+  alb_controller_config = var.alb_controller_config
+  common_tags           = local.common_tags
 }
