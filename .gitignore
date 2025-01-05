@@ -131,7 +131,61 @@ dist
 
 
 # Terraform provider files
-**/.terraform/providers/**
-.terraform
+**/.terraform/**
+.terraform/
+.terraform.lock.hcl
 *.tfstate
 *.tfstate.*
+*.tfvars
+.terraformrc
+terraform.rc
+crash.log
+crash.*.log
+
+
+# Certificate files
+ci/certificate/
+*.pem
+*.key
+*.crt
+*.cnf
+
+
+# Certificates and Keys
+*.pem
+*.key
+*.crt
+*.csr
+*.srl
+*.p12
+*.pfx
+*.cer
+openssl.cnf
+
+# Monitoring and Observability
+**/monitoring/secrets/
+**/prometheus/data/
+**/grafana/data/
+**/alertmanager/config/
+**/logs/
+*.log
+
+# Security and Auth
+**/certs/
+**/ssl/
+**/tls/
+**/.kube/
+**/.aws/
+**/auth/
+**/.credentials
+**/secrets/
+*/*.secret
+
+ci/k8s/dev/secret.yaml
+README.md
+CHANGELOG.md
+CONTRIBUTING.md
+docs/*.md
+*.bak
+*.backup
+docs/private/
