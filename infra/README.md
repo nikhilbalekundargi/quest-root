@@ -191,3 +191,49 @@ terraform workspace new <workspace-name>
 # Select an existing workspace
 terraform workspace select <workspace-name>
 ```
+
+# Creating and Uploading a Self-Signed Certificate
+## Step 1: Create a Self-Signed Certificate on Local Machine
+Generate a private key and a certificate signing request (CSR), then create a self-signed certificate.
+
+```bash
+# Generate private key
+openssl genrsa -out tls.key 2048
+
+# Generate CSR
+openssl req -new -key tls.key -out tls.csr
+
+# Generate self-signed certificate
+openssl x509 -req -days 365 -in tls.csr -signkey tls.key -out tls.crt
+```
+
+## Step 2: Verify the Certificate and Key
+
+```bash
+# Check the private key
+openssl rsa -in tls.key -check
+
+# Display the certificate
+openssl x509 -in tls.crt -text -noout
+```
+
+## Step 3: Convert to PEM Format
+
+```bash
+# Convert private key to PEM format
+openssl rsa -in tls.key -text > private.pem
+
+# Convert certificate to PEM format
+openssl x509 -inform PEM -in tls.crt > public.pem
+```
+
+## Step 4: Upload Certificate to ACM
+Upload the self-signed certificate to AWS Certificate Manager (ACM).
+
+```bash
+# Upload certificate to ACM
+aws iam upload-server-certificate --server-certificate-name QUEST-SSC --certificate-body file://public.pem --private-key file://private.pem
+
+# Upload certificate to ACM with specific profile
+aws iam upload-server-certificate --server-certificate-name QUEST-SSC --certificate-body file://public.pem --private-key file://private.pem --profile root
+```
