@@ -182,7 +182,6 @@ openssl.cnf
 */*.secret
 
 ci/k8s/dev/secret.yaml
-README.md
 CHANGELOG.md
 CONTRIBUTING.md
 docs/*.md
