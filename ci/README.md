@@ -53,21 +53,39 @@
 - Remove HTTP port 80
 
 ### Deployment Steps
+
+
+## Deployment Steps
+
+### Obtain Secret Word
 ```bash
 # Create namespace
 kubectl apply -f namespace.yaml
 
-# Create service accounts
-kubectl apply -f alb-sa.yaml
-kubectl apply -f sa.yaml
-
-# Apply secrets
-kubectl apply -f secret.yaml
-
-# Deploy application
+# Deploy application and service
 kubectl apply -f deploy.yaml
 kubectl apply -f service.yaml
 
-# Configure ingress
+# Create service accounts
+kubectl apply -f sa.yaml
+
+# Port forward the service to access it locally to get the secret_word
+kubectl port-forward svc/my-service 8080:80
+
+# Access the service on localhost to get the secret word
+curl http://localhost:8080/secret
+
+#Add above secret to deployment yaml
+# Create secret on cluster
+kubectl apply -f secret.yaml
+
+# Update the deployment yaml 
+kubectl apply -f deploy.yaml
+
+# Create service account for ALB
+kubectl apply -f alb-sa.yaml
+
+# Create ingress
 kubectl apply -f ingress.yaml
 ```
+
