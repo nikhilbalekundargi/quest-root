@@ -28,7 +28,7 @@ aws ecr get-login-password \
 docker build -t 904233133644.dkr.ecr.ap-south-1.amazonaws.com/quest-dev-app:latest .
 ```
 
-# Push docker image
+# For Mac M Series Chips
 ```bash
 docker buildx build --platform linux/amd64 --push -t 904233133644.dkr.ecr.ap-south-1.amazonaws.com/quest-dev-app:latest .
 ```

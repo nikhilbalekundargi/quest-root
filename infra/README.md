@@ -237,3 +237,7 @@ aws iam upload-server-certificate --server-certificate-name QUEST-SSC --certific
 # Upload certificate to ACM with specific profile
 aws iam upload-server-certificate --server-certificate-name QUEST-SSC --certificate-body file://public.pem --private-key file://private.pem --profile root
 ```
+
+
+## Note
+I have not added the code for production environment evn tough I have created Prod folder in environments.
